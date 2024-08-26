@@ -8,4 +8,4 @@ RUN apt-get update && apt-get install -y ffmpeg
 RUN yarn global add npm@latest
 RUN yarn install
 
-CMD ["npm", "start"]
+CMD ["yarn", "start"]
