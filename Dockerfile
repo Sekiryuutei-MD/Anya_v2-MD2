@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y ffmpeg
 RUN npm install -g npm@latest
 
 # Installer yarn globalement
-RUN npm install -g yarn
+RUN npm install -g yarn@latest
 
 # Installer les dépendances avec yarn
 RUN yarn install --network-concurrency 1
