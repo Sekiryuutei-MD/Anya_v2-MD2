@@ -5,7 +5,7 @@ WORKDIR /root/Anyav2
 
 RUN apt-get update && apt-get install -y ffmpeg
 
-RUN yarn global add npm@latest
-RUN yarn install
+RUN npm install -g npm@latest
+RUN npm install
 
-CMD ["yarn", "start"]
+CMD ["npm", "start"]
