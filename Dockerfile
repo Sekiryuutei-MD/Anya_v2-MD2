@@ -1,22 +1,29 @@
-FROM node:18
+FROM node:lts-buster
 
-# Définir le répertoire de travail
-WORKDIR /root/Anyav2
+RUN apt-get update && \
+  apt-get install -y \
+  ffmpeg \
+  imagemagick \
+  webp && \
+  apt-get upgrade -y && \
+  rm -rf /var/lib/apt/lists/*
 
-# Copier tous les fichiers dans le conteneur
+COPY package.json .
+
+RUN yarn global add npm
+
+RUN yarn global add yarn
+
+RUN yarn global add pm2
+
+RUN yarn global add forever
+
+RUN yarn install
+
+RUN rm -rf yarn*
+
 COPY . .
 
-# Mettre à jour les paquets et installer ffmpeg
-RUN apt-get update && apt-get install -y ffmpeg
+RUN yarn install
 
-# Installer la dernière version de npm
-RUN npm install -g npm@latest
-
-# Installer yarn globalement
-RUN npm install -g yarn@latest
-
-# Installer les dépendances avec yarn
-RUN yarn install --network-concurrency 1
-
-# Commande de démarrage de l'application
 CMD ["npm", "start"]
